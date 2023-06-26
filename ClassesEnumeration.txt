@@ -9,12 +9,12 @@ class User
 	String email;
 	Boolean isLoggedIn;
 	Ticket[] bookedTickets;
+	
 }
 
 class Ticket 
 {
 	Double price;
-	Boolean isTwoWay;
 	Date startDate;
 	Date endDate;
 	String origin;
@@ -32,13 +32,29 @@ class Date
 
 class Vehicle {
 
-	String type;
+	String type;	//plane,bus,etc
 	String company;
 }
 
 class Company {
 	
+	String name;
 	String image;
-		
-	
+	Ticket[] tickets;
+	map<Ticket,Date> sales;
+	User admin;
+}
+class Passengers {
+	String name;
+	String lastName;
+	String nationalId;
+	String sex;
+	Date birthday;
+}
+
+class Transaction {
+	Date date;
+	double price;
+	String Id;
+	String type;
 }
