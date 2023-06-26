@@ -1,0 +1,44 @@
+class User
+{
+	String username;
+	String fullName;
+	String phoneNumber;
+	String nationalId;
+	Double balance;
+	String password;
+	String email;
+	Boolean isLoggedIn;
+	Ticket[] bookedTickets;
+}
+
+class Ticket 
+{
+	Double price;
+	Boolean isTwoWay;
+	Date startDate;
+	Date endDate;
+	String origin;
+	String destination;
+	int capacity;
+	int booked;
+	Vehicle vehicle;
+}
+
+class Date 
+{
+	String date;
+	String time;
+}
+
+class Vehicle {
+
+	String type;
+	String company;
+}
+
+class Company {
+	
+	String image;
+		
+	
+}
