@@ -1,0 +1,11 @@
+{
+    "type": "GET/POST/DELETE",
+    "route": "/user/",
+    "payload": {
+        "name": "mohsen",
+        "id": "",
+        "date": "",
+        "stuff": "",
+        "things": ""
+    }
+}
