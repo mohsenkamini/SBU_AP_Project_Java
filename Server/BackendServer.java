@@ -1,24 +1,25 @@
 import java.io.*;
 import java.net.*;
+import org.json.*;  
 
 public class BackendServer {
     public static void main (String[] args){
         try {
-            ServerSocket ss = new ServerSocket(6666);
+            ServerSocket ss = new ServerSocket(8000);
             Socket s = ss.accept();     // establish connection
-            DataInputStream din = new DataInputStream(s.getInputStream());
-            DataOutputStream dout = new DataOutputStream(s.getOutputStream());
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-            String str = "",str2="";
-            while (!str.equals("stop")) {
-                str = (String)din.readUTF();
-                System.out.println("client says: " + str);
-                str2=br.readLine();
-                dout.writeUTF(str2);
-                dout.flush();           // will not be transported to socket/file
+            StringBuilder sb = new StringBuilder();
+            BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream())); 
+            String line=null;
+            while ( (line = br.readLine()) != null) {
+                sb.append(line).append(System.lineSeparator());
             }
-            din.close();
+            String content = sb.toString();
+            String modified = content.substring(2, content.length());
+            System.out.println(modified.charAt(0));
+            
+            JSONObject json = new JSONObject(modified);  
+            String type = json.getString("type");
+            System.out.println(type);
             ss.close();
         } catch (Exception a) {System.out.println(a);}
     }
