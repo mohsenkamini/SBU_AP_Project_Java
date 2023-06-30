@@ -8,10 +8,15 @@ public class JsonApplication {
  public static void main (String [] args) {
 
    // write a java object to a json file:
-   Dummy dummy = new Dummy(2, "Mohsen", "Iranian");
+   Dummy dummy = new Dummy(3, "Mohsen", "Iranian");
    writeJson(dummy, "/tmp/somewhere.json");
 
-   
+   // read a json file to a java object:
+   Gson gson = new Gson();
+   try {
+      Dummy d2 = gson.fromJson(new FileReader("/tmp/somewhere.json"), Dummy.class); 
+      System.out.println(d2.id);
+   } catch (IOException io) {System.out.println("IO exception:" + io);};
  }
  
  public static void writeJson(Object obj, String fileAddress) { 
@@ -23,20 +28,22 @@ public class JsonApplication {
     writer.close();
    } catch (IOException io) {System.out.println("IO exception:" + io);};
  }  
+/* 
+ public static Object readJson(String fileAddress) { 
+   Object object;
+   try {
+    Gson gson = new Gson();
+	 object = gson.fromJson(new FileReader(fileAddress), Object.class); 
+    } catch (IOException io) {System.out.println("IO exception:" + io);};
+
+   return object;
+ } */ 
  
- /*private static Student readJSON() throws FileNotFoundException { 
-    GsonBuilder builder = new GsonBuilder(); 
-    Gson gson = builder.create(); 
-    BufferedReader bufferedReader = new BufferedReader(
-       new FileReader("student.json"));   
-    
-    Student student = gson.fromJson(bufferedReader, Student.class); 
-    return student; 
- } */
+ 
 }
 
 class Dummy {
-    private int id;
+    int id;
     private String name;
     private transient String nationality;
 
