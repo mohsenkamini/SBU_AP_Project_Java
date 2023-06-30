@@ -20,7 +20,9 @@ public class JsonApplication {
    dummy.map.put(4,"Grapes");   
 
    writeJson(dummy, "/tmp/somewhere.json");
-
+   // turn a string into a jsonobject
+   JsonObject jobj =  StringToJsonObject("{\"1\": \"Mango\"}");
+   System.out.println(jobj.get("1"));
    // read a json file to a java object:
    Gson gson = new GsonBuilder().setPrettyPrinting().create();
    try {
@@ -38,6 +40,11 @@ public class JsonApplication {
     writer.close();
    } catch (IOException io) {System.out.println("IO exception:" + io);};
  }  
+ public static JsonObject StringToJsonObject (String jsonLine ) {
+  JsonElement jelement = new JsonParser().parse(jsonLine);
+  JsonObject  jobject = jelement.getAsJsonObject();
+  return jobject;
+ }
 /* 
  public static Object readJson(String fileAddress) { 
    Object object;
