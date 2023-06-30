@@ -14,7 +14,7 @@ public class JsonApplication {
    
  }
  
- public static void writeJSON(Dummy obj, String fileAddress) { 
+ public static void writeJSON(Object obj, String fileAddress) { 
    try {
     Gson gson = new Gson();
     FileWriter writer = new FileWriter(fileAddress);
