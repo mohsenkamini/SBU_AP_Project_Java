@@ -4,6 +4,7 @@ import org.json.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import com.google.gson.*; 
+
 public class ExampleClient {
     public static void main (String[] args){
         try {
@@ -17,7 +18,7 @@ public class ExampleClient {
             
                 //Read JSON file
             JSONObject obj = jsonParser.parse(reader);
-            
+
             String str = obj.toString(),str2="";
             dout.writeUTF(str);
             dout.flush();

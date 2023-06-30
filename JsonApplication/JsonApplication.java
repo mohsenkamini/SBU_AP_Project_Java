@@ -2,6 +2,7 @@
 import com.google.gson.*; 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 
 public class JsonApplication {
  
@@ -9,6 +10,9 @@ public class JsonApplication {
 
    // write a java object to a json file:
    Dummy dummy = new Dummy(3, "Mohsen", "Iranian");
+   dummy.friends.add("majid");
+   dummy.friends.add("mmd");
+   dummy.friends.add("reza");
    writeJson(dummy, "/tmp/somewhere.json");
 
    // read a json file to a java object:
@@ -46,6 +50,7 @@ class Dummy {
     int id;
     private String name;
     private transient String nationality;
+    ArrayList<String> friends = new ArrayList<String>();
 
     public Dummy(int id, String name, String nationality) {
         this.id = id;
