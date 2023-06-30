@@ -15,7 +15,7 @@ public class BackendServer {
             }
             String content = sb.toString();
             String modified = content.substring(2, content.length());
-            System.out.println(modified.charAt(0));
+            System.out.println(modified.charAt(modified.length()-2));
             
             JSONObject json = new JSONObject(modified);  
             String type = json.getString("type");
