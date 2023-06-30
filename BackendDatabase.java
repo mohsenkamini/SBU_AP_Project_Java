@@ -2,9 +2,6 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import javax.lang.model.util.ElementScanner14;
-
 import com.google.gson.*;
 
 public class BackendDatabase {
@@ -17,18 +14,25 @@ public class BackendDatabase {
     ArrayList<User> users = new ArrayList<User>();
     ArrayList<Ticket> tickets = new ArrayList<Ticket>();
     HashMap<Integer,String> userPasses=new HashMap<Integer,String>();
-    public Boolean authenticate (String username, String password) {
 
+    public Boolean authenticate (String username, String password) {
+        Boolean result=false;
+        return result;
     }
     public Boolean isAuthenticated (String username) {
-
+        Boolean result=false;
+        return result;
     }
     public Ticket[] listAvailableTickets (Ticket desired) {
         // check created tickets and if the time and source and dest is okay
         // output the available tickets.
+        Ticket[] result=new Ticket[1];
+        return result;
     }
     public User loadUser (String username) {
         // load user info from json file and return User
+        User result=new User result;
+        return result;
     }
     public void storeUser (User user) {
         // store user info to json file 
@@ -74,6 +78,14 @@ public class BackendDatabase {
                             result.statusCode=200;
                             result.payload=user.getTickets();
                             break;
+                        case "/user/profile/":
+                            result.statusCode=200;
+                            result.payload=user;
+                            break;
+                        case "/user/transactions/":
+                            result.statusCode=200;
+                            result.payload=user.getTickets();
+                            break;
                         default:
                             result.statusCode=400;
                             result.message="Bad request";
@@ -93,5 +105,6 @@ public class BackendDatabase {
             }
         }
     }
+    return result;
 
 }

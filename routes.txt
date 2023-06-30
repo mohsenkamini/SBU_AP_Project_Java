@@ -1,0 +1,12 @@
+POST:
+"/user/signup/"
+"/user/login/"
+"/user/changepassword/"
+"/user/addbalance/"
+"/user/changeprofile/"
+
+"/user/tickets/"
+"/user/transactions/"
+"/user/profile/"
+"/tickets/"
+
