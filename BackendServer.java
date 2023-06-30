@@ -3,6 +3,9 @@ import java.net.*;
 import org.json.*;  
 
 public class BackendServer {
+    public static Boolean authenticate () {
+        return false;
+    }
     public static void main (String[] args){
         try {
             ServerSocket ss = new ServerSocket(8000);
@@ -20,7 +23,7 @@ public class BackendServer {
             JSONObject json = new JSONObject(modified);  
             String type = json.getString("type");
             System.out.println(type);
-            ss.close();
+            ss.close(); 
         } catch (Exception a) {System.out.println(a);}
     }
 }

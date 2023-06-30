@@ -1,8 +1,8 @@
-
 import com.google.gson.*; 
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class JsonApplication {
  
@@ -13,10 +13,16 @@ public class JsonApplication {
    dummy.friends.add("majid");
    dummy.friends.add("mmd");
    dummy.friends.add("reza");
+
+   dummy.map.put(1,"Mango");  //Put elements in Map  
+   dummy.map.put(2,"Apple");    
+   dummy.map.put(3,"Banana");   
+   dummy.map.put(4,"Grapes");   
+
    writeJson(dummy, "/tmp/somewhere.json");
 
    // read a json file to a java object:
-   Gson gson = new Gson();
+   Gson gson = new GsonBuilder().setPrettyPrinting().create();
    try {
       Dummy d2 = gson.fromJson(new FileReader("/tmp/somewhere.json"), Dummy.class); 
       System.out.println(d2.id);
@@ -25,7 +31,7 @@ public class JsonApplication {
  
  public static void writeJson(Object obj, String fileAddress) { 
    try {
-    Gson gson = new Gson();
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
     FileWriter writer = new FileWriter(fileAddress);
     gson.toJson(obj, writer);
     writer.flush();
@@ -51,7 +57,8 @@ class Dummy {
     private String name;
     private transient String nationality;
     ArrayList<String> friends = new ArrayList<String>();
-
+    HashMap<Integer,String> map=new HashMap<Integer,String>();//Creating HashMap    
+    
     public Dummy(int id, String name, String nationality) {
         this.id = id;
         this.name = name;
