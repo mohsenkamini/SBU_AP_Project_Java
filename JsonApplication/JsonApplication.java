@@ -8,13 +8,13 @@ public class JsonApplication {
  public static void main (String [] args) {
 
    // write a java object to a json file:
-   Dummy dummy = new Dummy(1, "Mohsen", "Iranian");
-   writeJSON(dummy, "/tmp/somewhere.json");
+   Dummy dummy = new Dummy(2, "Mohsen", "Iranian");
+   writeJson(dummy, "/tmp/somewhere.json");
 
    
  }
  
- public static void writeJSON(Object obj, String fileAddress) { 
+ public static void writeJson(Object obj, String fileAddress) { 
    try {
     Gson gson = new Gson();
     FileWriter writer = new FileWriter(fileAddress);
