@@ -1,5 +1,6 @@
 {
-    "type": "GET/POST/DELETE",
+    "method": "GET/POST/PUT/DELETE",
+    "username": "mohsen",
     "route": "/user/",
     "payload": {
         "name": "mohsen",
