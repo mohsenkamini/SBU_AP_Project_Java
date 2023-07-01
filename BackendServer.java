@@ -24,9 +24,9 @@ public class BackendServer {
             System.out.println( jsonObject.get("method"));
             //getting the request and handling it
             APIRequest req = new APIRequest();
-            APIResponse response = handleRequest(req);
+            //APIResponse response = handleRequest(req);
           
-        } catch (IOException | JSONException e) {
+        } catch (IOException e) {
             System.out.println("Error occurred: " + e.getMessage());
         } finally {
             clientSocket.close();
@@ -56,7 +56,7 @@ public class BackendServer {
         server.startServer(8000);
     }
 
-            
+    /*
     public synchronized APIResponse handleRequest(APIRequest req) {
         APIResponse result;
         if (!db.isAuthenticated(req.username))
@@ -122,5 +122,5 @@ public class BackendServer {
             }
         }
         return result;
-    } 
+    }  */      
 }
