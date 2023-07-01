@@ -104,8 +104,9 @@ public class BackendServer {
                             break;
                         case "/user/tickets/":
                             result.statusCode = 200;
+                            System.out.println(req.payload.toString());
                             JsonObject payloadJsonUserTickets = req.payload.getAsJsonObject();
-                            ArrayList<Ticket> userTickets = db.userTickets(payloadJsonUserTickets.get("username").toString());
+                            ArrayList<Ticket> userTickets = db.userTickets(req.username);
                             String finalUserTickets = new Gson().toJson(userTickets, userTickets.getClass());
                             System.out.println("user tickets");
                             result.payload = new Gson().fromJson(finalUserTickets, JsonElement.class);
