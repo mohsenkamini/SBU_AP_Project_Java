@@ -5,9 +5,9 @@ import java.util.HashMap;
 import com.google.gson.*;
 
 public class BackendDatabase {
-    File db;
-    BackendDatabase(File db) {
-        this.db=db;
+    File baseAddress;
+    BackendDatabase(File baseAddress) {
+        this.baseAddress=baseAddress;
     }
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -15,7 +15,7 @@ public class BackendDatabase {
     ArrayList<Ticket> tickets = new ArrayList<Ticket>();
     HashMap<Integer,String> userPasses=new HashMap<Integer,String>();
 
-    public Boolean authenticate (String username, String password) {
+    public Boolean login (String username, String password) {
         Boolean result=false;
         return result;
     }
@@ -31,7 +31,7 @@ public class BackendDatabase {
     }
     public User loadUser (String username) {
         // load user info from json file and return User
-        User result=new User result;
+        User result=new User();
         return result;
     }
     public void storeUser (User user) {
