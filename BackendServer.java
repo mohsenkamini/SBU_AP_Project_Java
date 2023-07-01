@@ -1,9 +1,11 @@
 import java.io.*;
 import java.net.*;
 import org.json.*;  
+import com.google.gson.*;
 
 public class BackendServer {
     BackendDatabase db;
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public static void main (String[] args){
         try {
@@ -32,7 +34,7 @@ public class BackendServer {
         // check authentication 
             if (req.method.equals("POST") && req.route.equals("/user/login/"))
             {
-                authenticate(req.username,req.payload.password);
+                authenticate(req.username,req.payload.getAsJsonObject().get("password"));
                 if (db.isAuthenticated(req.username)) {
                     result.statusCode=200;
                     result.message="ورود موفق";
@@ -61,7 +63,7 @@ public class BackendServer {
                     switch (req.route) {
                         case "/tickets/":
                             result.statusCode=200;
-                            result.payload=listAvailableTickets(req.payload);
+                            //result.payload=db.listAvailableTickets(req.payload.get("startDate"),req.payload.get("origin"),req.payload.get("origin"));
                             break;
                         case "/user/tickets/":
                             result.statusCode=200;
