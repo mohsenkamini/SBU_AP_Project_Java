@@ -20,6 +20,9 @@ public class ExampleClient {
             } catch (IOException io) {System.out.println("IO exception:" + io);};
 
             dout.flush();
+
+
+            Thread.sleep(5000);
             dout.close();
             /*while (!str2.equals("stop")) {
                 str2=br.readLine();

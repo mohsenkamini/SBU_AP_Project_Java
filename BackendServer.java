@@ -7,9 +7,8 @@ public class BackendServer {
     Gson gson = new GsonBuilder().setLenient().create();
 
     private synchronized void handleClientRequest(Socket clientSocket) throws IOException {
-        try (
-                BufferedReader br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        ) {
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
@@ -38,6 +37,7 @@ public class BackendServer {
             ServerSocket ss = new ServerSocket(portNumber);
             while (true) {
                 Socket clientSocket = ss.accept();
+                System.out.println("gfdg");
                 Thread clientThread = new Thread(() -> {
                     try {
                         handleClientRequest(clientSocket);
@@ -45,10 +45,12 @@ public class BackendServer {
                         throw new RuntimeException(e);
                     }
                 });
+            clientThread.start();
             }
         } catch (IOException e) {
             System.out.println("Error occurred");
         }
+
     }
 
     public static void main(String[] args) {
