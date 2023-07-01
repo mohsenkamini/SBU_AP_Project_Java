@@ -114,8 +114,8 @@ public class BackendServer {
                         case "/user/profile/":
                             result.statusCode = 200;
                             JsonObject payloadJsonProfile = req.payload.getAsJsonObject();
-                            User user = db.profileDetails(payloadJsonProfile.get("username").toString());
-                            String finalUserProfile = new Gson().toJson(user, user.getClass());
+                            User user = db.profileDetails(req.username);
+                            String finalUserProfile = new Gson().toJson(user, User.class);
                             result.payload = new Gson().fromJson(finalUserProfile, JsonElement.class);
                             System.out.println(finalUserProfile);
                             break;
