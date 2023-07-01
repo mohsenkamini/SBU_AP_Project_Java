@@ -19,6 +19,16 @@ public class BackendDatabase {
 
     }
 
+    ArrayList<Transaction> getUserTransaction(String username) {
+        ArrayList<Transaction> trs = null;
+        for (int i = 0; i < users.size(); i++)
+            if (username.equals(users.get(i).username)) {
+                trs = users.get(i).transactions;
+            }
+        return trs;
+
+    }
+
     ArrayList<Ticket> userTickets(String username) {
         ArrayList<Ticket> resTickets = new ArrayList<Ticket>();
         for (int i = 0; i < users.size(); i++)

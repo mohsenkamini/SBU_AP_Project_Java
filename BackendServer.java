@@ -101,14 +101,13 @@ public class BackendServer {
                             String finalTickets = new Gson().toJson(desiredTickets, desiredTickets.getClass());
                             System.out.println(finalTickets);
                             result.payload = new Gson().fromJson(finalTickets, JsonElement.class);
-                            //result.payload=db.listAvailableTickets(req.payload.get("startDate"),req.payload.get("origin"),req.payload.get("origin"));
                             break;
                         case "/user/tickets/":
                             result.statusCode = 200;
                             JsonObject payloadJsonUserTickets = req.payload.getAsJsonObject();
                             ArrayList<Ticket> userTickets = db.userTickets(payloadJsonUserTickets.get("username").toString());
                             String finalUserTickets = new Gson().toJson(userTickets, userTickets.getClass());
-                            System.out.println(finalUserTickets);
+                            System.out.println("user tickets");
                             result.payload = new Gson().fromJson(finalUserTickets, JsonElement.class);
                             break;
                         case "/user/profile/":
@@ -119,17 +118,22 @@ public class BackendServer {
                             result.payload = new Gson().fromJson(finalUserProfile, JsonElement.class);
                             System.out.println(finalUserProfile);
                             break;
-//                        case "/user/transactions/":
-//                            result.statusCode = 200;
-//                            result.payload = user.getTickets();
-//                            break;
-//                        default:
-//                            result.statusCode = 400;
-//                            result.message = "Bad request";
-//                            break;
+                        case "/user/transactions/":
+                            result.statusCode = 200;
+                            JsonObject payloadJsonTransactions = req.payload.getAsJsonObject();
+                            ArrayList<Transaction> userTransactions = db.getUserTransaction(payloadJsonTransactions.get("username").toString());
+                            String finalUserTransaction = new Gson().toJson(userTransactions, userTransactions.getClass());
+                            result.payload = new Gson().fromJson(finalUserTransaction, JsonElement.class);
+                            System.out.println(finalUserTransaction);
+                            break;
+                        default:
+                            result.statusCode = 400;
+                            result.message = "Bad request";
+                            break;
                     }
                     break;
                 case "POST":
+
                     break;
                 case "PUT":
                     break;
