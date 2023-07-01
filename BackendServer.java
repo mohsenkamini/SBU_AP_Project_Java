@@ -6,7 +6,7 @@ public class BackendServer {
     BackendDatabase db;
     Gson gson = new GsonBuilder().setLenient().create();
 
-    private synchronized void handleClientRequest(Socket clientSocket) throws IOException {
+    /*private synchronized void handleClientRequest(Socket clientSocket) throws IOException {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             StringBuilder sb = new StringBuilder();
@@ -30,22 +30,24 @@ public class BackendServer {
         } finally {
             clientSocket.close();
         }
-    }
+    }*/
 
     public synchronized void startServer(int portNumber) {
         try {
             ServerSocket ss = new ServerSocket(portNumber);
             while (true) {
                 Socket clientSocket = ss.accept();
-                System.out.println("gfdg");
-                Thread clientThread = new Thread(() -> {
+                /*Thread clientThread = new Thread(() -> {
                     try {
-                        handleClientRequest(clientSocket);
+                      System.out.println("enter thread");
+                      handleClientRequest(clientSocket);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                });
-            clientThread.start();
+                });*/
+                ClientThread clientThread = new ClientThread(clientSocket);
+                clientThread.start();
+                System.out.println("end thread");
             }
         } catch (IOException e) {
             System.out.println("Error occurred");
