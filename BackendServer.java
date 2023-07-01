@@ -99,18 +99,26 @@ public class BackendServer {
                             JsonObject payloadJson = req.payload.getAsJsonObject();
                             ArrayList<Ticket> desiredTickets = db.findTicket(payloadJson.get("startDate").toString());
                             String finalTickets = new Gson().toJson(desiredTickets, desiredTickets.getClass());
-                            result.payload = new Gson().fromJson(finalTickets, JsonObject.class);
+                            System.out.println(finalTickets);
+                            result.payload = new Gson().fromJson(finalTickets, JsonElement.class);
                             //result.payload=db.listAvailableTickets(req.payload.get("startDate"),req.payload.get("origin"),req.payload.get("origin"));
                             break;
-//                        case "/user/tickets/":
-//                            result.statusCode = 200;
-//
-//                            result.payload = user.getTickets();
-//                            break;
-//                        case "/user/profile/":
-//                            result.statusCode = 200;
-//                            result.payload = user;
-//                            break;
+                        case "/user/tickets/":
+                            result.statusCode = 200;
+                            JsonObject payloadJsonUserTickets = req.payload.getAsJsonObject();
+                            ArrayList<Ticket> userTickets = db.userTickets(payloadJsonUserTickets.get("username").toString());
+                            String finalUserTickets = new Gson().toJson(userTickets, userTickets.getClass());
+                            System.out.println(finalUserTickets);
+                            result.payload = new Gson().fromJson(finalUserTickets, JsonElement.class);
+                            break;
+                        case "/user/profile/":
+                            result.statusCode = 200;
+                            JsonObject payloadJsonProfile = req.payload.getAsJsonObject();
+                            User user = db.profileDetails(payloadJsonProfile.get("username").toString());
+                            String finalUserProfile = new Gson().toJson(user, user.getClass());
+                            result.payload = new Gson().fromJson(finalUserProfile, JsonElement.class);
+                            System.out.println(finalUserProfile);
+                            break;
 //                        case "/user/transactions/":
 //                            result.statusCode = 200;
 //                            result.payload = user.getTickets();

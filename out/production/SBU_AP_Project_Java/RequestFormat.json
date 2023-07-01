@@ -1,12 +1,12 @@
 {
-    "method": "GET/POST/PUT/DELETE",
+    "method": "GET",
     "username": "mohsen",
-    "route": "/user/",
+    "route": "/tickets/",
     "payload": {
-        "name": "mohsen",
-        "id": "",
-        "date": "",
-        "stuff": "",
-        "things": ""
+        "startDate": "2023.9.10",
+        "endDate": "2023.10.7",
+        "origin": "Tehran",
+        "destintaion": "Do ghooz Abad"
+
     }
 }

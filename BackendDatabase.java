@@ -7,7 +7,25 @@ import com.google.gson.*;
 
 public class BackendDatabase {
     public BackendDatabase() {
+    }
 
+    User profileDetails(String username) {
+        User currUser = null;
+        for (int i = 0; i < users.size(); i++)
+            if (username.equals(users.get(i).username)) {
+                currUser = users.get(i);
+            }
+        return currUser;
+
+    }
+
+    ArrayList<Ticket> userTickets(String username) {
+        ArrayList<Ticket> resTickets = new ArrayList<Ticket>();
+        for (int i = 0; i < users.size(); i++)
+            if (username.equals(users.get(i).username)) {
+                resTickets = users.get(i).tickets;
+            }
+        return resTickets;
     }
 
     ArrayList<Ticket> findTicket(String startDate) {
