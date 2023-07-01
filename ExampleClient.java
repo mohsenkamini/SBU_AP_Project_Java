@@ -31,9 +31,10 @@ public class ExampleClient {
             //Thread.sleep(2000);
             while ((line = br.readLine()) != null) {
                 sb.append(line).append(System.lineSeparator());
+                System.out.println("some");
             }
 
-            Thread.sleep(2000);
+            //Thread.sleep(2000);
             String content = sb.toString();
             String modified = content.substring(2, content.length());
             System.out.println(modified.charAt(modified.length() - 2));
@@ -49,8 +50,8 @@ public class ExampleClient {
                 dout.writeUTF(str2);
                 dout.flush();
             }
-            dout.close();
             */
+            dout.close();
             s.close();
         } catch (Exception a) {System.out.println(a);}
     }

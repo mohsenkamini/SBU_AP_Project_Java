@@ -46,6 +46,7 @@ public class ClientThread extends Thread{
             dout.close();
             System.out.println("ehem");
             socket.close();
+            System.out.println("xxx");
           
         } catch (IOException e) {
             System.out.println("Error occurred: " + e.getMessage());
