@@ -1,9 +1,14 @@
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import com.google.gson.*;
 
 public class BackendServer {
-    BackendDatabase db;
+
+    static BackendDatabase db = new BackendDatabase();
     Gson gson = new GsonBuilder().setLenient().create();
 
     /*private synchronized void handleClientRequest(Socket clientSocket) throws IOException {
@@ -17,7 +22,6 @@ public class BackendServer {
             String content = sb.toString();
             String modified = content.substring(2, content.length());
             System.out.println(modified.charAt(modified.length() - 2));
-
             JsonElement jsonElement = JsonParser.parseString(modified);
             JsonObject jsonObject = jsonElement.getAsJsonObject();
             System.out.println( jsonObject.get("method"));
@@ -59,52 +63,68 @@ public class BackendServer {
         server.startServer(8000);
     }
 
-    /*
-    public synchronized APIResponse handleRequest(APIRequest req) {
-        APIResponse result;
-        if (!db.isAuthenticated(req.username))
-        // check authentication 
-            if (req.method.equals("POST") && req.route.equals("/user/login/"))
-            {
-                db.login(req.username,req.payload.getAsJsonObject().get("password"));
-                if (db.isAuthenticated(req.username)) {
-                    result.statusCode = 200;
-                    result.message = "ورود موفق";
-                } else {
-                    result.statusCode = 401;
-                    result.message = "نام کاربری یا رمزعبور اشتباه است.";
-                }
-            } else {
-                if (req.method.equals("POST") && req.route.equals("/user/signup/")) {
 
-                    result.statusCode = 200;
-                    result.message = "حساب کاربری شما با موفقیت ساخته شد.";
-                } else {
-                    result.statusCode = 403;
-                    result.message = "لطفا ابتدا وارد حساب کاربری خود شوید.";
-                }
-            }
-        else {
-            // requested is authenticated. now handle it:
-            User user = db.loadUser(req.username);
+    public static synchronized APIResponse handleRequest(APIRequest req) {
+        APIResponse result = new APIResponse();
+        if (!db.isAuthenticated(req.username))
+            // check authentication
+//            if (req.method.equals("POST") && req.route.equals("/user/login/"))
+//            {
+//                db.login(req.username,req.payload.getAsJsonObject().get("password"));
+//                if (db.isAuthenticated(req.username)) {
+//                    result.statusCode = 200;
+//                    result.message = "ورود موفق";
+//                } else {
+//                    result.statusCode = 401;
+//                    result.message = "نام کاربری یا رمزعبور اشتباه است.";
+//                }
+//            } else {
+//                if (req.method.equals("POST") && req.route.equals("/user/signup/")) {
+//
+//                    result.statusCode = 200;
+//                    result.message = "حساب کاربری شما با موفقیت ساخته شد.";
+//                } else {
+//                    result.statusCode = 403;
+//                    result.message = "لطفا ابتدا وارد حساب کاربری خود شوید.";
+//                }
+//            }
+//        else {
+//            // requested is authenticated. now handle it:
+//            User user = db.loadUser(req.username);
             switch (req.method) {
                 case "GET":
                     switch (req.route) {
                         case "/tickets/":
                             result.statusCode = 200;
-                            //result.payload=db.listAvailableTickets(req.payload.get("startDate"),req.payload.get("origin"),req.payload.get("origin"));
+                            JsonObject payloadJson = req.payload.getAsJsonObject();
+                            ArrayList<Ticket> desiredTickets = db.findTicket(payloadJson.get("startDate").toString());
+                            String finalTickets = new Gson().toJson(desiredTickets, desiredTickets.getClass());
+                            System.out.println(finalTickets);
+                            result.payload = new Gson().fromJson(finalTickets, JsonElement.class);
                             break;
                         case "/user/tickets/":
                             result.statusCode = 200;
-                            result.payload = user.getTickets();
+                            JsonObject payloadJsonUserTickets = req.payload.getAsJsonObject();
+                            ArrayList<Ticket> userTickets = db.userTickets(payloadJsonUserTickets.get("username").toString());
+                            String finalUserTickets = new Gson().toJson(userTickets, userTickets.getClass());
+                            System.out.println("user tickets");
+                            result.payload = new Gson().fromJson(finalUserTickets, JsonElement.class);
                             break;
                         case "/user/profile/":
                             result.statusCode = 200;
-                            result.payload = user;
+                            JsonObject payloadJsonProfile = req.payload.getAsJsonObject();
+                            User user = db.profileDetails(payloadJsonProfile.get("username").toString());
+                            String finalUserProfile = new Gson().toJson(user, user.getClass());
+                            result.payload = new Gson().fromJson(finalUserProfile, JsonElement.class);
+                            System.out.println(finalUserProfile);
                             break;
                         case "/user/transactions/":
                             result.statusCode = 200;
-                            result.payload = user.getTickets();
+                            JsonObject payloadJsonTransactions = req.payload.getAsJsonObject();
+                            ArrayList<Transaction> userTransactions = db.getUserTransaction(payloadJsonTransactions.get("username").toString());
+                            String finalUserTransaction = new Gson().toJson(userTransactions, userTransactions.getClass());
+                            result.payload = new Gson().fromJson(finalUserTransaction, JsonElement.class);
+                            System.out.println(finalUserTransaction);
                             break;
                         default:
                             result.statusCode = 400;
@@ -113,6 +133,7 @@ public class BackendServer {
                     }
                     break;
                 case "POST":
+
                     break;
                 case "PUT":
                     break;
@@ -123,7 +144,7 @@ public class BackendServer {
                     result.message = "Bad request";
                     break;
             }
-        }
+//        }
         return result;
-    }  */      
+    }
 }

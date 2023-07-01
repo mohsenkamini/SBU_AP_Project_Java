@@ -39,11 +39,10 @@ public class ClientThread extends Thread{
             //getting the request and handling it
 
             APIRequest req = gson.fromJson(jsonObject, APIRequest.class); 
-            //System.out.println(req.username);
-
-            APIResponse response = new APIResponse();
+            APIResponse response = BackendServer.handleRequest(req);
             String str = gson.toJson(response,APIResponse.class);
             System.out.println("Server response: "+str+"\n");
+
             dout.writeUTF(str);
             dout.flush();
             dout.close();

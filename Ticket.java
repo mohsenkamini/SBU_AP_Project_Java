@@ -1,13 +1,32 @@
 class Ticket {
     Double price;
-    Date startDate;
-    Date endDate;
+    String startDate;
+    String endDate;
+
+    String departureTime;
+    String landingTime;
     String origin;
     String destination;
     int capacity;
     int booked;
     Vehicle vehicle;
 
+
+    public void setDepartureTime(String s) {
+        this.departureTime = s;
+    }
+
+    public String getDepartureTime() {
+        return departureTime;
+    }
+
+    public String getLandingTime() {
+        return landingTime;
+    }
+
+    public void setLandingTime(String s) {
+        this.landingTime = s;
+    }
 
     public void setPrice(Double price) {
         this.price = price;
@@ -17,19 +36,19 @@ class Ticket {
         return this.price;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return this.startDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return this.endDate;
     }
 

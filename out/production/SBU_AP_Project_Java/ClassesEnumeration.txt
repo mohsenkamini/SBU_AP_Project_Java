@@ -15,10 +15,8 @@ class User
 class Ticket 
 {
 	Double price;
-	   String startDate;
-        String endDate;
-        String departureTime;
-        String landingTime;
+	Date startDate;
+	Date endDate;
 	String origin;
 	String destination;
 	int capacity;
