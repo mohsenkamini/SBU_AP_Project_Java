@@ -7,7 +7,8 @@ import java.util.Set;
 import com.google.gson.*;
 
 public class BackendServer {
-    BackendDatabase db;
+
+    static BackendDatabase db = new BackendDatabase();
     Gson gson = new GsonBuilder().setLenient().create();
 
     /*private synchronized void handleClientRequest(Socket clientSocket) throws IOException {
@@ -63,8 +64,8 @@ public class BackendServer {
     }
 
 
-    public synchronized APIResponse handleRequest(APIRequest req) {
-        APIResponse result = null;
+    public static synchronized APIResponse handleRequest(APIRequest req) {
+        APIResponse result = new APIResponse();
         if (!db.isAuthenticated(req.username))
             // check authentication
 //            if (req.method.equals("POST") && req.route.equals("/user/login/"))
@@ -101,23 +102,23 @@ public class BackendServer {
                             result.payload = new Gson().fromJson(finalTickets, JsonObject.class);
                             //result.payload=db.listAvailableTickets(req.payload.get("startDate"),req.payload.get("origin"),req.payload.get("origin"));
                             break;
-                        case "/user/tickets/":
-                            result.statusCode = 200;
-
-                            result.payload = user.getTickets();
-                            break;
-                        case "/user/profile/":
-                            result.statusCode = 200;
-                            result.payload = user;
-                            break;
-                        case "/user/transactions/":
-                            result.statusCode = 200;
-                            result.payload = user.getTickets();
-                            break;
-                        default:
-                            result.statusCode = 400;
-                            result.message = "Bad request";
-                            break;
+//                        case "/user/tickets/":
+//                            result.statusCode = 200;
+//
+//                            result.payload = user.getTickets();
+//                            break;
+//                        case "/user/profile/":
+//                            result.statusCode = 200;
+//                            result.payload = user;
+//                            break;
+//                        case "/user/transactions/":
+//                            result.statusCode = 200;
+//                            result.payload = user.getTickets();
+//                            break;
+//                        default:
+//                            result.statusCode = 400;
+//                            result.message = "Bad request";
+//                            break;
                     }
                     break;
                 case "POST":

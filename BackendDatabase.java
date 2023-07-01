@@ -6,6 +6,10 @@ import java.util.HashMap;
 import com.google.gson.*;
 
 public class BackendDatabase {
+    public BackendDatabase() {
+
+    }
+
     ArrayList<Ticket> findTicket(String startDate) {
         ArrayList<Ticket> availableTickets = new ArrayList<Ticket>();
         for (int i = 0; i < tickets.size(); i++) {
