@@ -105,7 +105,7 @@ public class BackendServer {
                         case "/user/tickets/":
                             result.statusCode = 200;
                             //System.out.println(req.payload.toString());
-                            //JsonObject payloadJsonUserTickets = req.payload.getAsJsonObject();
+                            //JsonObject payloadJsonUserTickets = req.payload.getAsJsonObject();// no need for that in this req
                             ArrayList<Ticket> userTickets = db.userTickets(req.username);
                             String finalUserTickets = new Gson().toJson(userTickets, userTickets.getClass());
                             //System.out.println("user tickets");
@@ -113,7 +113,7 @@ public class BackendServer {
                             break;
                         case "/user/profile/":
                             result.statusCode = 200;
-                            JsonObject payloadJsonProfile = req.payload.getAsJsonObject();
+                            // JsonObject payloadJsonProfile = req.payload.getAsJsonObject();// no need for that in this req
                             User user = db.profileDetails(req.username);
                             String finalUserProfile = new Gson().toJson(user, User.class);
                             result.payload = new Gson().fromJson(finalUserProfile, JsonElement.class);
@@ -121,9 +121,9 @@ public class BackendServer {
                             break;
                         case "/user/transactions/":
                             result.statusCode = 200;
-                            JsonObject payloadJsonTransactions = req.payload.getAsJsonObject();
-                            ArrayList<Transaction> userTransactions = db.getUserTransaction(payloadJsonTransactions.get("username").toString());
-                            String finalUserTransaction = new Gson().toJson(userTransactions, userTransactions.getClass());
+                            // JsonObject payloadJsonTransactions = req.payload.getAsJsonObject();  // no need for that in this req
+                            ArrayList<Transaction> userTransactions = db.getUserTransaction(req.username);
+                            String finalUserTransaction = new Gson().toJson(userTransactions, Transaction.class);
                             result.payload = new Gson().fromJson(finalUserTransaction, JsonElement.class);
                             System.out.println(finalUserTransaction);
                             break;
