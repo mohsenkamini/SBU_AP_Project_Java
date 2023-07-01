@@ -1,12 +1,10 @@
 import java.io.*;
 import java.net.*;
-
-import org.json.*;
 import com.google.gson.*;
 
 public class BackendServer {
     BackendDatabase db;
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    Gson gson = new GsonBuilder().setLenient().create();
 
     private synchronized void handleClientRequest(Socket clientSocket) throws IOException {
         try (
@@ -21,15 +19,13 @@ public class BackendServer {
             String modified = content.substring(2, content.length());
             System.out.println(modified.charAt(modified.length() - 2));
 
-            JSONObject json = new JSONObject(modified);
-            String type = json.getString("type");
-            System.out.println(type);
-
+            JsonElement jsonElement = JsonParser.parseString(modified);
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
+            System.out.println( jsonObject.get("method"));
             //getting the request and handling it
-            APIRequest request = new APIRequest();
-            APIResponse response = handleRequest(request);
-            //
-
+            APIRequest req = new APIRequest();
+            APIResponse response = handleRequest(req);
+          
         } catch (IOException | JSONException e) {
             System.out.println("Error occurred: " + e.getMessage());
         } finally {
@@ -68,7 +64,7 @@ public class BackendServer {
             String line = null;
             while ((line = br.readLine()) != null) {
                 sb.append(line).append(System.lineSeparator());
-            }
+            } 
             String content = sb.toString();
             String modified = content.substring(2, content.length());
             System.out.println(modified.charAt(modified.length() - 2));
@@ -82,12 +78,14 @@ public class BackendServer {
         }*/
     }
 
+            
     public synchronized APIResponse handleRequest(APIRequest req) {
         APIResponse result;
         if (!db.isAuthenticated(req.username))
-            // check authentication
-            if (req.method.equals("POST") && req.route.equals("/user/login/")) {
-                authenticate(req.username, req.payload.getAsJsonObject().get("password"));
+        // check authentication 
+            if (req.method.equals("POST") && req.route.equals("/user/login/"))
+            {
+                db.login(req.username,req.payload.getAsJsonObject().get("password"));
                 if (db.isAuthenticated(req.username)) {
                     result.statusCode = 200;
                     result.message = "ورود موفق";
@@ -146,5 +144,5 @@ public class BackendServer {
             }
         }
         return result;
-    }
+    } */
 }

@@ -1,8 +1,5 @@
 import java.io.*;
 import java.net.*;
-import org.json.*;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import com.google.gson.*; 
 
 public class ExampleClient {
@@ -13,14 +10,15 @@ public class ExampleClient {
             DataInputStream din = new DataInputStream(s.getInputStream());
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             //JSON parser object to parse read file
-            JSONParser jsonParser = new JSONParser();
-            FileReader reader = new FileReader("RequestFormat.json");
             
-                //Read JSON file
-            JSONObject obj = jsonParser.parse(reader);
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            try {
+               APIRequest req = gson.fromJson(new FileReader("RequestFormat.json"), APIRequest.class); 
+               System.out.println(req.method);
+               String str = new Gson().toJson(req,APIRequest.class),str2="";
+                dout.writeUTF(str);
+            } catch (IOException io) {System.out.println("IO exception:" + io);};
 
-            String str = obj.toString(),str2="";
-            dout.writeUTF(str);
             dout.flush();
             dout.close();
             /*while (!str2.equals("stop")) {
