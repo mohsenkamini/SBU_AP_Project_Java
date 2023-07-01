@@ -47,7 +47,6 @@ public class BackendServer {
                 });*/
                 ClientThread clientThread = new ClientThread(clientSocket);
                 clientThread.start();
-                System.out.println("end thread");
             }
         } catch (IOException e) {
             System.out.println("Error occurred");

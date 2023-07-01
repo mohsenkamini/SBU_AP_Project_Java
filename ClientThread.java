@@ -10,6 +10,8 @@ public class ClientThread extends Thread{
     DataOutputStream out = null;
     DataOutputStream in = null;
 
+    Gson gson = new GsonBuilder().setLenient().create();
+
     public ClientThread(Socket socket) {
         this.socket = socket;
     }
@@ -18,6 +20,7 @@ public class ClientThread extends Thread{
     public void run () {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
@@ -31,13 +34,21 @@ public class ClientThread extends Thread{
             JsonObject jsonObject = jsonElement.getAsJsonObject();
             System.out.println( jsonObject.get("method"));
             //getting the request and handling it
-            APIRequest req = new APIRequest();
-            //APIResponse response = handleRequest(req);
+
+            APIRequest req = gson.fromJson(jsonObject, APIRequest.class); 
+            System.out.println(req.username);
+
+            APIResponse response = new APIResponse();
+            String str = new Gson().toJson(response,APIResponse.class);
+
+            dout.writeUTF(str);
+            dout.flush();
+            dout.close();
+            System.out.println("ehem");
             socket.close();
           
         } catch (IOException e) {
             System.out.println("Error occurred: " + e.getMessage());
-        }
+        } //catch (InterruptedException i) {System.out.println("interrupt exception");}
     }
-
 }
