@@ -1,4 +1,5 @@
 class Ticket {
+    int ID;
     Double price;
     String startDate;
     String endDate;

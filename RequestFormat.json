@@ -1,8 +1,10 @@
 {
     "method": "GET",
     "username": "mohsen",
-    "route": "/user/transactions/",
+    "route": "/user/tickets/",
     "payload": {
+        "password": "1234",
+        "email": "m@gmail.com",
         "startDate": "2023.9.10",
         "endDate": "2023.10.7",
         "origin": "Tehran",

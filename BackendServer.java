@@ -68,29 +68,38 @@ public class BackendServer {
         APIResponse result = new APIResponse();
         if (!db.isAuthenticated(req.username))
             // check authentication
-//            if (req.method.equals("POST") && req.route.equals("/user/login/"))
-//            {
-//                db.login(req.username,req.payload.getAsJsonObject().get("password"));
-//                if (db.isAuthenticated(req.username)) {
-//                    result.statusCode = 200;
-//                    result.message = "ورود موفق";
-//                } else {
-//                    result.statusCode = 401;
-//                    result.message = "نام کاربری یا رمزعبور اشتباه است.";
-//                }
-//            } else {
-//                if (req.method.equals("POST") && req.route.equals("/user/signup/")) {
-//
-//                    result.statusCode = 200;
-//                    result.message = "حساب کاربری شما با موفقیت ساخته شد.";
-//                } else {
-//                    result.statusCode = 403;
-//                    result.message = "لطفا ابتدا وارد حساب کاربری خود شوید.";
-//                }
-//            }
-//        else {
-//            // requested is authenticated. now handle it:
-//            User user = db.loadUser(req.username);
+            if (req.method.equals("POST") && req.route.equals("/user/login/"))
+            {
+                User user = db.getUserByUsername(req.username);
+                JsonObject logInPayloadJson = req.payload.getAsJsonObject();
+                String inputPassword = logInPayloadJson.get("password").toString();
+                if (db.login(user.username, inputPassword)) {
+                    String finalUser = new Gson().toJson(user, User.class);
+                    result.payload = new Gson().fromJson(finalUser, JsonElement.class);
+                    result.statusCode = 200;
+                    result.message = "ورود موفق";
+                }
+                else {
+                    result.statusCode = 401;
+                    result.message = "نام کاربری یا رمزعبور اشتباه است.";
+                }
+            } else {
+                if (req.method.equals("POST") && req.route.equals("/user/signup/")) {
+                    JsonObject signUpPayloadJson = req.payload.getAsJsonObject();
+                    String signUpUsername = req.username;
+                    String signUpPass = signUpPayloadJson.get("password").toString();
+                    String signUpEmail = signUpPayloadJson.get("email").toString();
+                    db.SignUp(signUpEmail, signUpUsername, signUpPass);
+                    result.statusCode = 200;
+                    result.message = "حساب کاربری شما با موفقیت ساخته شد.";
+                } else {
+                    result.statusCode = 401;
+                    result.message = "لطفا ابتدا وارد حساب کاربری خود شوید.";
+                }
+            }
+        else {
+            // requested is authenticated. now handle it:
+            //User user = db.loadUser(req.username);
             switch (req.method) {
                 case "GET":
                     switch (req.route) {
@@ -134,18 +143,20 @@ public class BackendServer {
                     }
                     break;
                 case "POST":
-
-                    break;
                 case "PUT":
                     break;
                 case "DELETE":
+                case "/company/deleteticket/":
+                    JsonObject deleteTicketPayloadJson = req.payload.getAsJsonObject();
+                    String ticketID = deleteTicketPayloadJson.get("ticketID").toString();
+                    boolean isDeleted = db.deleteTicket(Integer.parseInt(ticketID));
                     break;
                 default:
                     result.statusCode = 400;
                     result.message = "Bad request";
                     break;
             }
-//        }
+        }
         return result;
     }
 }

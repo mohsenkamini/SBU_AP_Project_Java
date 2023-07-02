@@ -29,6 +29,14 @@ public class BackendDatabase {
 
     }
 
+    User getUserByUsername(String username) {
+        User finalUser = null;
+        for (int i = 0; i < users.size(); i++)
+            if (username.equals(users.get(i).username))
+                finalUser = users.get(i);
+        return finalUser;
+    }
+
     ArrayList<Ticket> userTickets(String username) {
         ArrayList<Ticket> resTickets = new ArrayList<Ticket>();
         for (int i = 0; i < users.size(); i++)
@@ -56,17 +64,43 @@ public class BackendDatabase {
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
     ArrayList<User> users = new ArrayList<User>();
+    ArrayList<User> loggedUsers = new ArrayList<User>();
     ArrayList<Ticket> tickets = new ArrayList<Ticket>();
     HashMap<Integer, String> userPasses = new HashMap<Integer, String>();
 
+    public void SignUp(String email, String username, String pass) {
+        User newUser = new User();
+        newUser.setEmail(email);
+        newUser.setUsername(username);
+        newUser.setPassword(pass);
+        users.add(newUser);
+    }
+
     public Boolean login(String username, String password) {
-        Boolean result = false;
-        return result;
+        for (int i = 0; i < users.size(); i++)
+            if (username.equals(users.get(i).username)) {
+                if (password.equals(users.get(i).getPassword()))
+                    //adding the user to the loggedUsers array list
+                    loggedUsers.add(users.get(i));
+                return true;
+            }
+        return false;
+    }
+
+    public boolean deleteTicket(int ticketID) {
+        for (int i = 0; i < tickets.size(); i++)
+            if (tickets.get(i).ID == ticketID) {
+                tickets.remove(tickets.get(i));
+                return true;
+            }
+        return false;
     }
 
     public Boolean isAuthenticated(String username) {
-        Boolean result = false;
-        return result;
+        for (int i = 0; i < loggedUsers.size(); i++)
+            if (username.equals(loggedUsers.get(i).username))
+                return true;
+        return false;
     }
 
     public Ticket[] listAvailableTickets(Ticket desired) {
