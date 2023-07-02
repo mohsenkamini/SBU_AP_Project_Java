@@ -139,8 +139,7 @@ public class BackendServer {
                     String signUpUsername = req.username.toString();
                     String signUpPass = signUpPayloadJson.get("password1").toString();
                     String signUpEmail = signUpPayloadJson.get("email").toString();
-                    db.SignUp(signUpEmail, signUpUsername,signUpPass);
-
+                    db.SignUp(signUpEmail, signUpUsername, signUpPass);
 
                 case "/user/login/":
                     User user = db.getUserByUsername(req.username);
@@ -151,10 +150,16 @@ public class BackendServer {
                         result.payload = new Gson().fromJson(finalUser, JsonElement.class);
                     }
 
+
                     break;
-                case "PUT":g
+
+                case "PUT":
                     break;
                 case "DELETE":
+                case "/company/deleteticket":
+                    JsonObject deleteTicketPayloadJson = req.payload.getAsJsonObject();
+                    String ticketID = deleteTicketPayloadJson.get("ticketID").toString();
+                    boolean isDeleted = db.deleteTicket(Integer.parseInt(ticketID));
                     break;
                 default:
                     result.statusCode = 400;
