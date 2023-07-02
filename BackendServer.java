@@ -8,8 +8,8 @@ import com.google.gson.*;
 
 public class BackendServer {
 
-    static BackendDatabase db = new BackendDatabase("./database.json");
-    Gson gson = new GsonBuilder().setLenient().create();
+    static BackendDatabase db;
+    
 
     /*private synchronized void handleClientRequest(Socket clientSocket) throws IOException {
         try {
@@ -60,6 +60,15 @@ public class BackendServer {
 
     public static void main(String[] args) {
         BackendServer server = new BackendServer();
+        Gson gson = new GsonBuilder().setLenient().create();
+        try {
+            BackendDatabase tmp = gson.fromJson(new FileReader("./database.json"), BackendDatabase.class); 
+            BackendServer.db = tmp;
+            System.out.println("Loaded initial db from: "+db.baseAddress);
+         } catch (IOException io) {
+            System.out.println("No initial DB. Creating a new one...");
+            BackendServer.db =new BackendDatabase("./database.json");
+        };
         server.startServer(8000);
     }
 
@@ -77,12 +86,12 @@ public class BackendServer {
                     String finalUser = new Gson().toJson(user, User.class);
                     result.payload = new Gson().fromJson(finalUser, JsonElement.class);
                     result.statusCode = 200;
-                    result.message = "ورود موفق";
+                    result.message = "Successfully logged in!";
                     db.update();
                 }
                 else {
                     result.statusCode = 401;
-                    result.message = "نام کاربری یا رمزعبور اشتباه است.";
+                    result.message = "Wrong credentials";
                 }
             } else {
                 if (req.method.equals("POST") && req.route.equals("/user/signup/")) {
@@ -92,11 +101,11 @@ public class BackendServer {
                     String signUpEmail = signUpPayloadJson.get("email").toString();
                     db.SignUp(signUpEmail, signUpUsername, signUpPass);
                     result.statusCode = 200;
-                    result.message = "حساب کاربری شما با موفقیت ساخته شد.";
+                    result.message = "Account created successfully!";
                     db.update();
                 } else {
                     result.statusCode = 401;
-                    result.message = "لطفا ابتدا وارد حساب کاربری خود شوید.";
+                    result.message = "Please login first!";
                 }
             }
         else {

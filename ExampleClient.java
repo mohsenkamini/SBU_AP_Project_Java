@@ -23,7 +23,7 @@ public class ExampleClient {
 
 
 
-            Thread.sleep(2000);
+            Thread.sleep(500);
             dout.flush();
             
             String line;
