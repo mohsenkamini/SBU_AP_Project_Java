@@ -1,0 +1,15 @@
+{
+    "method": "POST",
+    "username": "mohsen",
+    "company": "IranAir",
+    "route": "/company/create/",
+    "payload": {
+        "name": "IranAir",
+        "image": "https://some.com",
+        "admin": {
+            "username": "username"
+        },
+        "tickets": [],
+        "sales": {}
+    }
+}

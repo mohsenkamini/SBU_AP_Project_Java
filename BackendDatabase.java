@@ -29,6 +29,10 @@ public class BackendDatabase {
         companies.add(newComp);
     }
 
+    void addTicket(Ticket newTicket) {
+        tickets.add(newTicket);
+    }
+
     User profileDetails(String username) {
         User currUser = null;
         for (int i = 0; i < users.size(); i++)

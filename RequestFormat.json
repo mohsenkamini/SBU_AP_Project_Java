@@ -1,14 +1,16 @@
 {
     "method": "POST",
     "username": "mohsen",
-    "route": "/company/create/",
+    "company": "IranAir",
+    "route": "/company/addticket/",
     "payload": {
-        "name": "IranAir",
-        "image": "https://some.com",
-        "admin": {
-            "username": "username"
-        },
-        "tickets": [],
-        "sales": {}
+        "ID": "98245",
+        "price": 45363.46,
+        "startDate": "2023.12.02",
+        "endDate": "2023.12.03",
+        "origin": "Do ghoz abad",
+        "destination": "Tehran",
+        "capacity": 130,
+        "booked": 0
     }
 }

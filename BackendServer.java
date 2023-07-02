@@ -167,7 +167,6 @@ public class BackendServer {
                             result.statusCode = 200;
                             result.message="Company "+newComp.name + " created.";
                             break;
-
                         case "/user/changepassword":
                             JsonObject passwordPayloadJson = req.payload.getAsJsonObject();
                             String newPass1= String.valueOf(passwordPayloadJson.get("newPassword1"));
@@ -183,6 +182,15 @@ public class BackendServer {
                                 result.message="Failed to change the password!";
                             }
 
+                        case "/company/addticket/":
+                            // JsonObject companyCreatePayloadJson = req.payload.getAsJsonObject();
+                            System.out.println(req.payload.getAsJsonObject().toString());
+                            Ticket newTicket = new Gson().fromJson(req.payload.getAsJsonObject().toString(), Ticket.class);
+                            System.out.println(newTicket.destination);
+                            db.addTicket(newTicket);
+                            result.statusCode = 200;
+                            result.message="Added ticket for company "+req.company + ".";
+                            break;
                         default:
                             result.statusCode = 400;
                             result.message = "Bad request";
