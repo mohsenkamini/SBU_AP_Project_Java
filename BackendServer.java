@@ -158,7 +158,6 @@ public class BackendServer {
                     }
                     break;
                 case "POST":
-                    db.update();
                     switch (req.route) {
                         case "/company/create/":
                             // JsonObject companyCreatePayloadJson = req.payload.getAsJsonObject();
@@ -173,6 +172,7 @@ public class BackendServer {
                             result.message = "Bad request";
                         break;
                     }
+                    db.update();
                     break;
                 case "PUT":
                 db.update();
