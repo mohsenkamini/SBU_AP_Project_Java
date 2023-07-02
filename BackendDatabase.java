@@ -21,7 +21,7 @@ public class BackendDatabase {
 
     public void update() {
         // try {
-        JsonApplication.writeJson(this,this.baseAddress);
+        JsonApplication.writeJson(this, this.baseAddress);
         // } catch (Exception a) {System.out.println("clone exception:"+a.getMessage());};
     }
 
@@ -83,6 +83,17 @@ public class BackendDatabase {
         newUser.setUsername(username);
         newUser.setPassword(pass);
         users.add(newUser);
+    }
+
+    public boolean passwordChange(String username, String oldPassword, String newPass1, String newPass2) {
+        User user = getUserByUsername(username);
+        if (oldPassword.equals(user.password)) {
+            if (newPass1.equals(newPass2)) {
+                user.setPassword(newPass1);
+                return true;
+            }
+        }
+        return false;
     }
 
     public Boolean login(String username, String password) {

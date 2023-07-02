@@ -167,10 +167,27 @@ public class BackendServer {
                             result.statusCode = 200;
                             result.message="Company "+newComp.name + " created.";
                             break;
+
+                        case "/user/changepassword":
+                            JsonObject passwordPayloadJson = req.payload.getAsJsonObject();
+                            String newPass1= String.valueOf(passwordPayloadJson.get("newPassword1"));
+                            String newPass2= String.valueOf(passwordPayloadJson.get("newPassword2"));
+                            String oldPass= String.valueOf(passwordPayloadJson.get("oldPassword"));
+                            boolean res=db.passwordChange(req.username, oldPass,newPass1,newPass2);
+                            if(res) {
+                                result.statusCode = 200;
+                                result.message = "Password changed!";
+                            }
+                            else {
+                                result.statusCode=400;
+                                result.message="Failed to change the password!";
+                            }
+
                         default:
                             result.statusCode = 400;
                             result.message = "Bad request";
                         break;
+
                     }
                     db.update();
                     break;
