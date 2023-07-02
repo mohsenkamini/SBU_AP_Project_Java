@@ -116,6 +116,7 @@ public class BackendServer {
                     switch (req.route) {
                         case "/tickets/":
                             result.statusCode = 200;
+                            result.message="Tickets fetched";
                             JsonObject payloadJson = req.payload.getAsJsonObject();
                             ArrayList<Ticket> desiredTickets = db.findTicket(payloadJson.get("startDate").toString());
                             String finalTickets = new Gson().toJson(desiredTickets, desiredTickets.getClass());
@@ -124,6 +125,7 @@ public class BackendServer {
                             break;
                         case "/user/tickets/":
                             result.statusCode = 200;
+                            result.message="User Tickets fetched";
                             //System.out.println(req.payload.toString());
                             //JsonObject payloadJsonUserTickets = req.payload.getAsJsonObject();// no need for that in this req
                             ArrayList<Ticket> userTickets = db.userTickets(req.username);
@@ -133,6 +135,7 @@ public class BackendServer {
                             break;
                         case "/user/profile/":
                             result.statusCode = 200;
+                            result.message="User profile fetched";
                             // JsonObject payloadJsonProfile = req.payload.getAsJsonObject();// no need for that in this req
                             User user = db.profileDetails(req.username);
                             String finalUserProfile = new Gson().toJson(user, User.class);
@@ -141,6 +144,7 @@ public class BackendServer {
                             break;
                         case "/user/transactions/":
                             result.statusCode = 200;
+                            result.message="User transactions fetched";
                             // JsonObject payloadJsonTransactions = req.payload.getAsJsonObject();  // no need for that in this req
                             ArrayList<Transaction> userTransactions = db.getUserTransaction(req.username);
                             String finalUserTransaction = new Gson().toJson(userTransactions, Transaction.class);
@@ -155,6 +159,20 @@ public class BackendServer {
                     break;
                 case "POST":
                     db.update();
+                    switch (req.route) {
+                        case "/company/create/":
+                            // JsonObject companyCreatePayloadJson = req.payload.getAsJsonObject();
+                            System.out.println(req.payload.getAsJsonObject().toString());
+                            Company newComp = new Gson().fromJson(req.payload.getAsJsonObject().toString(), Company.class);
+                            db.addCompany(newComp);
+                            result.statusCode = 200;
+                            result.message="Company "+newComp.name + " created.";
+                            break;
+                        default:
+                            result.statusCode = 400;
+                            result.message = "Bad request";
+                        break;
+                    }
                     break;
                 case "PUT":
                 db.update();

@@ -11,6 +11,7 @@ public class BackendDatabase {
     public ArrayList<User> users = new ArrayList<User>();
     public ArrayList<User> loggedUsers = new ArrayList<User>();
     public ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+    public ArrayList<Company> companies = new ArrayList<Company>();
 
     //public HashMap<Integer, String> userPasses = new HashMap<Integer, String>();
 
@@ -22,6 +23,10 @@ public class BackendDatabase {
         // try {
         JsonApplication.writeJson(this,this.baseAddress);
         // } catch (Exception a) {System.out.println("clone exception:"+a.getMessage());};
+    }
+
+    void addCompany(Company newComp) {
+        companies.add(newComp);
     }
 
     User profileDetails(String username) {
