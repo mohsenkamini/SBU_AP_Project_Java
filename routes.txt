@@ -1,12 +1,20 @@
 POST:
 "/user/signup/"
 "/user/login/"
+"/user/bookticket/"
+"/tickets/"
+
+GET:
+"/user/profile/"
+"/user/tickets/"    // tickets that user has booked //mytrips page
+"/user/transactions/"
+"/tickets/"         // search through tickets in db
+
+
+PUT:
 "/user/changepassword/"
 "/user/addbalance/"
 "/user/changeprofile/"
 
-"/user/tickets/"
-"/user/transactions/"
-"/user/profile/"
-"/tickets/"
 
+DELETE:

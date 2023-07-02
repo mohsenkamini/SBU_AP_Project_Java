@@ -6,7 +6,22 @@ import java.util.HashMap;
 import com.google.gson.*;
 
 public class BackendDatabase {
-    public BackendDatabase() {
+    public String baseAddress;
+    //public Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    public ArrayList<User> users = new ArrayList<User>();
+    public ArrayList<User> loggedUsers = new ArrayList<User>();
+    public ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+
+    //public HashMap<Integer, String> userPasses = new HashMap<Integer, String>();
+
+    public BackendDatabase(String baseAddress) {
+        this.baseAddress = baseAddress;
+    }
+
+    public void update() {
+        // try {
+        JsonApplication.writeJson(this,this.baseAddress);
+        // } catch (Exception a) {System.out.println("clone exception:"+a.getMessage());};
     }
 
     User profileDetails(String username) {
@@ -56,17 +71,6 @@ public class BackendDatabase {
         return availableTickets;
     }
 
-    File baseAddress;
-
-    BackendDatabase(File baseAddress) {
-        this.baseAddress = baseAddress;
-    }
-
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    ArrayList<User> users = new ArrayList<User>();
-    ArrayList<User> loggedUsers = new ArrayList<User>();
-    ArrayList<Ticket> tickets = new ArrayList<Ticket>();
-    HashMap<Integer, String> userPasses = new HashMap<Integer, String>();
 
     public void SignUp(String email, String username, String pass) {
         User newUser = new User();

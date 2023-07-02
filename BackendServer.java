@@ -8,7 +8,7 @@ import com.google.gson.*;
 
 public class BackendServer {
 
-    static BackendDatabase db = new BackendDatabase();
+    static BackendDatabase db = new BackendDatabase("./database.json");
     Gson gson = new GsonBuilder().setLenient().create();
 
     /*private synchronized void handleClientRequest(Socket clientSocket) throws IOException {
@@ -78,6 +78,7 @@ public class BackendServer {
                     result.payload = new Gson().fromJson(finalUser, JsonElement.class);
                     result.statusCode = 200;
                     result.message = "ورود موفق";
+                    db.update();
                 }
                 else {
                     result.statusCode = 401;
@@ -92,6 +93,7 @@ public class BackendServer {
                     db.SignUp(signUpEmail, signUpUsername, signUpPass);
                     result.statusCode = 200;
                     result.message = "حساب کاربری شما با موفقیت ساخته شد.";
+                    db.update();
                 } else {
                     result.statusCode = 401;
                     result.message = "لطفا ابتدا وارد حساب کاربری خود شوید.";
@@ -143,9 +145,14 @@ public class BackendServer {
                     }
                     break;
                 case "POST":
+                    db.update();
+                    break;
                 case "PUT":
+                db.update();
                     break;
                 case "DELETE":
+                db.update();
+                    break;
                 case "/company/deleteticket/":
                     JsonObject deleteTicketPayloadJson = req.payload.getAsJsonObject();
                     String ticketID = deleteTicketPayloadJson.get("ticketID").toString();
