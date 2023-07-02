@@ -167,7 +167,7 @@ public class BackendServer {
                             result.statusCode = 200;
                             result.message="Company "+newComp.name + " created.";
                             break;
-                        case "/user/changepassword":
+                        case "/user/changepassword/":
                             JsonObject passwordPayloadJson = req.payload.getAsJsonObject();
                             String newPass1= String.valueOf(passwordPayloadJson.get("newPassword1"));
                             String newPass2= String.valueOf(passwordPayloadJson.get("newPassword2"));
