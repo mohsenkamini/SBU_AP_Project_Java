@@ -97,8 +97,10 @@ public class BackendDatabase {
     }
 
     public Boolean isAuthenticated(String username) {
-        Boolean result = false;
-        return result;
+        for (int i = 0; i < loggedUsers.size(); i++)
+            if (username.equals(loggedUsers.get(i).username))
+                return true;
+        return false;
     }
 
     public Ticket[] listAvailableTickets(Ticket desired) {
