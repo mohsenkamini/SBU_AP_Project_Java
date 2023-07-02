@@ -138,9 +138,13 @@ public class BackendServer {
 
 
                 case "/user/login/":
-                    User user=req.get
-                    String password=req.username.
-                    ArrayList<String> userLogInDetails=db.login(req.username, req.pa)
+                    User user = db.getUserByUsername(req.username);
+                    JsonObject payloadJson = req.payload.getAsJsonObject();
+                    String inputPassword = payloadJson.get("password").toString();
+                    if (db.login(user.username, inputPassword)) {
+                        String finalUser = new Gson().toJson(user, User.class);
+                        result.payload = new Gson().fromJson(finalUser, JsonElement.class);
+                    }
 
                     break;
                 case "PUT":

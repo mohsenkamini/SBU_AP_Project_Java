@@ -29,6 +29,14 @@ public class BackendDatabase {
 
     }
 
+    User getUserByUsername(String username) {
+        User finalUser = null;
+        for (int i = 0; i < users.size(); i++)
+            if (username.equals(users.get(i).username))
+                finalUser = users.get(i);
+        return finalUser;
+    }
+
     ArrayList<Ticket> userTickets(String username) {
         ArrayList<Ticket> resTickets = new ArrayList<Ticket>();
         for (int i = 0; i < users.size(); i++)
@@ -63,8 +71,8 @@ public class BackendDatabase {
     public Boolean login(String username, String password) {
         for (int i = 0; i < users.size(); i++)
             if (username.equals(users.get(i).username)) {
-               if(password.equals(users.get(i).getPassword()))
-                   return true;
+                if (password.equals(users.get(i).getPassword()))
+                    return true;
             }
         return false;
     }
