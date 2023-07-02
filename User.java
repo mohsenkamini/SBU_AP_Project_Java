@@ -42,7 +42,7 @@ class User {
         setEmail(newEmail);
     }
 
-    public void changenationalID(String newId) {
+    public void changeNationalID(String newId) {
         setNationalId(newId);
     }
 

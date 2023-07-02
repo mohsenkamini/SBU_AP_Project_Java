@@ -135,19 +135,24 @@ public class BackendServer {
                     break;
                 case "POST":
                 case "/user/signup/":
+                    JsonObject signUpPayloadJson = req.payload.getAsJsonObject();
+                    String signUpUsername = req.username.toString();
+                    String signUpPass = signUpPayloadJson.get("password1").toString();
+                    String signUpEmail = signUpPayloadJson.get("email").toString();
+                    db.SignUp(signUpEmail, signUpUsername,signUpPass);
 
 
                 case "/user/login/":
                     User user = db.getUserByUsername(req.username);
-                    JsonObject payloadJson = req.payload.getAsJsonObject();
-                    String inputPassword = payloadJson.get("password").toString();
+                    JsonObject logInPayloadJson = req.payload.getAsJsonObject();
+                    String inputPassword = logInPayloadJson.get("password").toString();
                     if (db.login(user.username, inputPassword)) {
                         String finalUser = new Gson().toJson(user, User.class);
                         result.payload = new Gson().fromJson(finalUser, JsonElement.class);
                     }
 
                     break;
-                case "PUT":
+                case "PUT":g
                     break;
                 case "DELETE":
                     break;

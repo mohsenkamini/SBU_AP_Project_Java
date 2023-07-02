@@ -68,6 +68,14 @@ public class BackendDatabase {
     ArrayList<Ticket> tickets = new ArrayList<Ticket>();
     HashMap<Integer, String> userPasses = new HashMap<Integer, String>();
 
+    public void SignUp(String email, String username, String pass)
+    {
+        User newUser=new User();
+        newUser.setEmail(email);
+        newUser.setUsername(username);
+        newUser.setPassword(pass);
+        users.add(newUser);
+    }
     public Boolean login(String username, String password) {
         for (int i = 0; i < users.size(); i++)
             if (username.equals(users.get(i).username)) {
