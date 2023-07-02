@@ -11,6 +11,7 @@ public class BackendDatabase {
     public ArrayList<User> users = new ArrayList<User>();
     public ArrayList<User> loggedUsers = new ArrayList<User>();
     public ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+    public ArrayList<Company> companies = new ArrayList<Company>();
 
     //public HashMap<Integer, String> userPasses = new HashMap<Integer, String>();
 
@@ -20,8 +21,16 @@ public class BackendDatabase {
 
     public void update() {
         // try {
-        JsonApplication.writeJson(this,this.baseAddress);
+        JsonApplication.writeJson(this, this.baseAddress);
         // } catch (Exception a) {System.out.println("clone exception:"+a.getMessage());};
+    }
+
+    void addCompany(Company newComp) {
+        companies.add(newComp);
+    }
+
+    void addTicket(Ticket newTicket) {
+        tickets.add(newTicket);
     }
 
     User profileDetails(String username) {
@@ -78,6 +87,17 @@ public class BackendDatabase {
         newUser.setUsername(username);
         newUser.setPassword(pass);
         users.add(newUser);
+    }
+
+    public boolean passwordChange(String username, String oldPassword, String newPass1, String newPass2) {
+        User user = getUserByUsername(username);
+        if (oldPassword.equals(user.password)) {
+            if (newPass1.equals(newPass2)) {
+                user.setPassword(newPass1);
+                return true;
+            }
+        }
+        return false;
     }
 
     public Boolean login(String username, String password) {

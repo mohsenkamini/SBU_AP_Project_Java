@@ -1,11 +1,13 @@
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 class Company {
 
     String name;
     String image;
-    Ticket[] tickets;
-    Map<Ticket, Date> sales;
+    public ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+    HashMap<Ticket,Date> sales=new HashMap<Ticket,Date>();
     User admin;
 
     public void setName(String name) {
@@ -22,22 +24,6 @@ class Company {
 
     public String getImage() {
         return this.image;
-    }
-
-    public void setTickets(Ticket[] tickets) {
-        this.tickets = tickets;
-    }
-
-    public Ticket[] getTickets() {
-        return this.tickets;
-    }
-
-    public void setSales(Map<Ticket, Date> sales) {
-        this.sales = sales;
-    }
-
-    public Map<Ticket, Date> getSales() {
-        return this.sales;
     }
 
     public void setAdmin(User admin) {

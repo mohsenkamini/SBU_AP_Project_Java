@@ -1,14 +1,16 @@
 {
-    "method": "GET",
+    "method": "POST",
     "username": "mohsen",
-    "route": "/user/profile/",
+    "company": "IranAir",
+    "route": "/company/addticket/",
     "payload": {
-        "password": "1234",
-        "email": "m@gmail.com",
-        "startDate": "2023.9.10",
-        "endDate": "2023.10.7",
-        "origin": "Tehran",
-        "destintaion": "Do ghooz Abad"
-
+        "ID": "98245",
+        "price": 45363.46,
+        "startDate": "2023.12.02",
+        "endDate": "2023.12.03",
+        "origin": "Do ghoz abad",
+        "destination": "Tehran",
+        "capacity": 130,
+        "booked": 0
     }
 }
