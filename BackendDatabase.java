@@ -56,12 +56,17 @@ public class BackendDatabase {
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
     ArrayList<User> users = new ArrayList<User>();
+    ArrayList<User> userPasswords = new ArrayList<User>();
     ArrayList<Ticket> tickets = new ArrayList<Ticket>();
     HashMap<Integer, String> userPasses = new HashMap<Integer, String>();
 
     public Boolean login(String username, String password) {
-        Boolean result = false;
-        return result;
+        for (int i = 0; i < users.size(); i++)
+            if (username.equals(users.get(i).username)) {
+               if(password.equals(users.get(i).getPassword()))
+                   return true;
+            }
+        return false;
     }
 
     public Boolean isAuthenticated(String username) {

@@ -134,6 +134,13 @@ public class BackendServer {
                     }
                     break;
                 case "POST":
+                case "/user/signup/":
+
+
+                case "/user/login/":
+                    User user=req.get
+                    String password=req.username.
+                    ArrayList<String> userLogInDetails=db.login(req.username, req.pa)
 
                     break;
                 case "PUT":
