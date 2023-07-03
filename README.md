@@ -7,7 +7,8 @@ This repo represents a backend API server, which communicates to clients over TC
 The overall Design is a simple client/server design. The server is completely stateless and stores everything in a statefull database.
 All these components are Java Classes. Even the API requests/responses.
 
-![Java Backend Design](https://github.com/mohsenkamini/SBU_AP_Project_Java/assets/77579794/df88a87f-0eb1-4319-94ef-923863cb2491)
+![Java Backend Design](https://github.com/AidaLf/SBU_AP_Project_Java/assets/77579794/db8f451d-38d5-4986-b329-372cf52e2f7d)
+
 
 ### Communication
 
