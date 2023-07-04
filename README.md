@@ -27,7 +27,7 @@ here's an example:
 }
 ~~~
 
-The meaning of `method` and `route` concepts are borrowed from REST and mean exactly the same. They define what you want to do with the server.
+The function of `method` and `route` concepts are borrowed from REST and mean exactly the same. They define what you want to do with the server.
 
 For `POST`, `PUT` and `DELETE` requests, you need to have a `payload`, which is a JSON object that provides the required fields for the server to complete your request. In this case `password`.
 
