@@ -33,6 +33,8 @@ For `POST`, `PUT` and `DELETE` requests, you need to have a `payload`, which is 
 
 > NOTE: You cannot send the JSON object prettified to the server, since the server will listen for an object only in one line. otherwise server won't recognize your request as a healthy JSON object.
 
+>‌ You can use [this file](https://github.com/mohsenkamini/SBU_AP_Project_Java/blob/main/ExampleClient.java) as a client to send APIs and receive responses. it reads a JSON file that (either prettified or not) as an API request.
+
 ### APIs
 Currently a list of available APIs are accessible on the release note of this project. But overally, you can think of every Java object in this project as a JSON object. For example when you want to add a ticket to the database, you fill the `payload`'s value with a JSON object created by the fields of `Ticket` class:
 ~~~
