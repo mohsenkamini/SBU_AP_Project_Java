@@ -2,6 +2,12 @@
 ## Introduction
 This repo represents a backend API server, which communicates to clients over TCP. It was developed for a college project as a simulation of [alibaba](https://www.alibaba.ir/).
 
+
+## 📖 Table of Contents
+- [Design](#design)
+- [Communication](#communication)
+- [APIs](#apis)
+
 ### Design
 
 The overall Design is a simple client/server design. The server is completely stateless and stores everything in a statefull database.
