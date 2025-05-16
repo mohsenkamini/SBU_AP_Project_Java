@@ -16,7 +16,7 @@
         <mxCell id="ibe251x8pU3LB1l8r29n-4" value="Does method call work?" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="210" y="500" width="150" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="ibe251x8pU3LB1l8r29n-5" value="backend.receiveRequest()?" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="ibe251x8pU3LB1l8r29n-5" value="Backend.receiveRequest()?" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="200" y="570" width="170" height="30" as="geometry" />
         </mxCell>
       </root>
