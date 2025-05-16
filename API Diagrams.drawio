@@ -1,9 +1,24 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0" version="27.0.5">
   <diagram name="Page-1" id="YhZmTB8D2AJgFiOfn9OW">
-    <mxGraphModel>
+    <mxGraphModel dx="865" dy="466" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="ibe251x8pU3LB1l8r29n-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ibe251x8pU3LB1l8r29n-2" target="ibe251x8pU3LB1l8r29n-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ibe251x8pU3LB1l8r29n-2" value="Front-end&lt;br&gt;(flutter)" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="510" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ibe251x8pU3LB1l8r29n-3" value="Back-end&lt;br&gt;(Java)" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="352" y="510" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ibe251x8pU3LB1l8r29n-4" value="Does method call work?" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="210" y="500" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ibe251x8pU3LB1l8r29n-5" value="backend.receiveRequest()?" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="200" y="570" width="170" height="30" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
