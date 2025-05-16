@@ -76,6 +76,9 @@ cat signup.json| jq --compact-output
 nc localhost 8000
 ~~~
 
+![Screenshot From 2025-05-16 19-45-05](https://github.com/user-attachments/assets/7be8745a-3fd7-4952-9a13-17b0b0836d8c)
+
+
 ### Conclusion
 This stack could be extended to whatever needs you might have, to be easily communicating over TCP, with a simple API structure.
 
