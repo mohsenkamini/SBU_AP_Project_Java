@@ -15,9 +15,12 @@ public class ExampleClient {
             
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             try {
-               APIRequest req = gson.fromJson(new FileReader("RequestFormat.json"), APIRequest.class); 
+	       // APIRequest req = gson.fromJson(new FileReader("RequestFormat.json"), APIRequest.class); 
+	       APIRequest req = gson.fromJson(new FileReader("signup.json"), APIRequest.class); 
+	       //APIRequest req = gson.fromJson(new FileReader("login.json"), APIRequest.class); 
                System.out.println(req.method);
                String str = new Gson().toJson(req,APIRequest.class),str2="";
+		System.out.println("Sending to server:\n" + str);
                dout.writeUTF(str+"\n");
             } catch (IOException io) {System.out.println("IO exception:" + io);};
 

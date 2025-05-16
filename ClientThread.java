@@ -30,12 +30,14 @@ public class ClientThread extends Thread{
             }
             String content = sb.toString();
             //System.out.println(content);
-            String modified = content.substring(2, content.length());
+	    //String modified = content.substring(2, content.length());
+            String modified = content; //.substring(2, content.length());
             //System.out.println(modified.charAt(modified.length() - 2));
 
             JsonElement jsonElement = JsonParser.parseString(modified);
             JsonObject jsonObject = jsonElement.getAsJsonObject();
-            System.out.println("Client request: "+jsonObject.toString());
+            // DEBUG PURPOSE
+	    // System.out.println("Client request: "+jsonObject.toString());
             //getting the request and handling it
 
             APIRequest req = gson.fromJson(jsonObject, APIRequest.class); 

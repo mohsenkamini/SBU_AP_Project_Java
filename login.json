@@ -1,7 +1,7 @@
 {
     "method": "POST",
     "username": "mohsen",
-    "route": "/user/profile/",
+    "route": "/user/login/",
     "payload": {
         "password": "1234",
         "email": "m@gmail.com",

@@ -38,7 +38,7 @@ public class BackendServer {
 
     public synchronized void startServer(int portNumber) {
         try {
-            ServerSocket ss = new ServerSocket(portNumber);
+            ServerSocket ss = new ServerSocket(portNumber, 50, InetAddress.getByName("0.0.0.0"));
             while (true) {
                 Socket clientSocket = ss.accept();
                 /*Thread clientThread = new Thread(() -> {
