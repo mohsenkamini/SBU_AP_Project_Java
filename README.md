@@ -7,6 +7,7 @@ This repo represents a backend API server, which communicates to clients over TC
 - [Design](#design)
 - [Communication](#communication)
 - [APIs](#apis)
+- [How to Run the Server](#how-to-run-the-server)
 
 ### Design
 
@@ -60,6 +61,19 @@ Currently a list of available APIs are accessible on the release note of this pr
         "booked": 0
     }
 }
+~~~
+
+### How to Run the Server
+
+~~~
+# Compile the project
+javac -cp gson-2.10.jar *.java
+# Run the Server
+java -cp .:gson-2.10.jar BackendServer
+# use this for data to send to the server:
+cat signup.json| jq --compact-output
+# RUN a Client
+nc localhost 8000
 ~~~
 
 ### Conclusion
