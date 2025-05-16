@@ -75,8 +75,8 @@ cat signup.json| jq --compact-output
 # RUN a Client
 nc localhost 8000
 ~~~
+![Screenshot From 2025-05-16 20-04-42](https://github.com/user-attachments/assets/004d6241-248e-4fd7-a2de-5cbf481fc372)
 
-![Screenshot From 2025-05-16 19-45-05](https://github.com/user-attachments/assets/7be8745a-3fd7-4952-9a13-17b0b0836d8c)
 
 
 ### Conclusion
