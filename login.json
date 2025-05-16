@@ -4,11 +4,6 @@
     "route": "/user/login/",
     "payload": {
         "password": "1234",
-        "email": "m@gmail.com",
-        "startDate": "2023.9.10",
-        "endDate": "2023.10.7",
-        "origin": "Tehran",
-        "destintaion": "Do ghooz Abad"
-
+        "email": "m@gmail.com"
     }
 }
